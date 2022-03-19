@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import MenuIcon from "@material-ui/icons/Menu";
 import CloseIcon from "@material-ui/icons/Close";
+import { selectCars } from "../features/Car/CarSlice";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const [burgerState, setBurgerState] = useState(false);
+  const cars = useSelector(selectCars);
 
   return (
     <Container>
@@ -12,23 +15,33 @@ const Header = () => {
         <img src="/images/logo.svg" alt="" />
       </a>
       <Menu>
-        <a href="#">Mode S</a>
-        <a href="#">Mode 3</a>
-        <a href="#">Mode X</a>
-        <a href="#">Mode Y</a>
+        {cars.length &&
+          cars.map((car, index) => (
+            <a href="#" key={index}>
+              {car}
+            </a>
+          ))}
       </Menu>
 
       <RightMenu>
         <a href="#">Shop</a>
         <a href="#">Tesla Account</a>
-        <CustomMenu />
+        <CustomMenu onClick={() => setBurgerState(true)} />
       </RightMenu>
 
       <BurgerNav show={burgerState}>
         <ul>
           <CloseWrapper>
-            <CustomClose />
+            <CustomClose onClick={() => setBurgerState(false)} />
           </CloseWrapper>
+          {cars.length &&
+            cars.map((car, index) => (
+              <li>
+                <a href="#" key={index}>
+                  {car}
+                </a>
+              </li>
+            ))}
           <li>
             <a href="#">Existing Inventory</a>
           </li>
@@ -117,7 +130,9 @@ const BurgerNav = styled.div`
   backdrop-filter: blur(4px);
   z-index: 1000;
   overflow: none;
-  transform: ${({ show }) => (show ? "translateX(0)" : "translateX(100%)")};
+  opacity: ${({ show }) => (show ? "1" : "0")};
+  visibility: ${({ show }) => (show ? "visible" : "hidden")};
+  transition: all 0.2s ease-in-out;
 
   ul {
     width: 300px;
@@ -130,6 +145,8 @@ const BurgerNav = styled.div`
     flex-direction: column;
     justify-content: left;
     text-align: start;
+    transform: ${({ show }) => (show ? "translateX(0)" : "translateX(100%)")};
+    transition: all 0.2s ease-in-out;
 
     li {
       padding: 15px 0px;
