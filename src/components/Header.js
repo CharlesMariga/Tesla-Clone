@@ -11,21 +11,21 @@ const Header = () => {
 
   return (
     <Container>
-      <a>
+      <a href="#top">
         <img src="/images/logo.svg" alt="" />
       </a>
       <Menu>
         {cars.length &&
           cars.map((car, index) => (
-            <a href="#" key={index}>
+            <a href={`${index}car`} key={index}>
               {car}
             </a>
           ))}
       </Menu>
 
       <RightMenu>
-        <a href="#">Shop</a>
-        <a href="#">Tesla Account</a>
+        <a href="#shop">Shop</a>
+        <a href="#tesla-account">Tesla Account</a>
         <CustomMenu onClick={() => setBurgerState(true)} />
       </RightMenu>
 
@@ -37,31 +37,28 @@ const Header = () => {
           {cars.length &&
             cars.map((car, index) => (
               <li>
-                <a href="#" key={index}>
+                <a href={`${car}index`} key={index}>
                   {car}
                 </a>
               </li>
             ))}
           <li>
-            <a href="#">Existing Inventory</a>
+            <a href="#existing-inventory">Existing Inventory</a>
           </li>
           <li>
-            <a href="#">Used Inventory</a>
+            <a href="#used-inventory">Used Inventory</a>
           </li>
           <li>
-            <a href="#">Trade-in</a>
+            <a href="#trade-in">Trade-in</a>
           </li>
           <li>
-            <a href="#">Cybertruck</a>
+            <a href="#cybertruck">Cybertruck</a>
           </li>
           <li>
-            <a href="#">Roadstar</a>
+            <a href="#roadster">Roadstar</a>
           </li>
           <li>
-            <a href="#">Existing Inventory</a>
-          </li>
-          <li>
-            <a href="#">Existing Inventory</a>
+            <a href="#existing-inventory">Existing Inventory</a>
           </li>
         </ul>
       </BurgerNav>
